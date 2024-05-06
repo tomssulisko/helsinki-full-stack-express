@@ -42,24 +42,36 @@ let persons = [
   })
 
   app.get('/api/persons/:id', (request, response) => {
-    const id = Number( request.params.id)
-    const person = persons.find(person => {
-      console.log(person.id, typeof person.id, id, typeof id, person.id === id)
+    const id = request.params.id
+    const personToshow = persons.find(person => {
       return person.id === id
     })
-    if (person) {
-      console.log(person)
-    response.json(person)  
+    if (personToshow) {
+      console.log(personToshow)
+    response.json(personToshow)  
     } else {
+      console.log("Person not found with id ", id)
         response.status(404).end()
     } 
   })
 
   app.delete('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    persons = persons.filter(person => person.id !== id)
-  
-    response.status(204).end()
+    const id = request.params.id
+    console.log("ID TO DELETE", id)
+    const personToDelete = persons.find(person => {
+      return person.id === id
+    })
+
+
+    if (personToDelete){
+      console.log("deleting", personToDelete)
+      persons = persons.filter(person => person.id !== id)
+      response.status(204).end()
+    } else {
+      console.log("Person not found with id ", id)
+      response.status(404).end()
+    } 
+    
   })
 
   const generateId = () => {
