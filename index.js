@@ -21,7 +21,7 @@ let persons = [
   },
   {
     name: "Merja Pallas",
-    number: "060-453573436",
+    number: "060-453573435",
     id: "4"
   }
 ]
@@ -35,6 +35,12 @@ let persons = [
     response.json(persons)
   })
   
+  app.get('/info', (request, response) => {
+    response.send(`<div>Catalogue has ${persons.length} persons 
+    <br/><br/>
+    ${new Date()}</div>`)
+  })
+
   app.get('/api/persons/:id', (request, response) => {
     const id = Number( request.params.id)
     const person = persons.find(person => {
