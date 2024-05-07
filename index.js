@@ -92,6 +92,16 @@ let persons = [
         error: 'missing person number' 
       })
     }
+
+    const samePerson = persons.find(person => {
+      return person.name === body.name
+    })
+
+    if (!!samePerson) {
+      return response.status(400).json({ 
+        error: 'name must be unique' 
+      })
+    }
   
     const person = {
       name: body.name,
