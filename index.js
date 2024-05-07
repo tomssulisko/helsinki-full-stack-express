@@ -26,6 +26,8 @@ let persons = [
   }
 ]
 
+ 
+
 
   app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
@@ -74,26 +76,27 @@ let persons = [
     
   })
 
-  const generateId = () => {
-    const maxId = persons.length > 0
-      ? Math.max(...persons.map(n => n.id))
-      : 0
-    return maxId + 1
+  const getRandomInt = (max) =>  {
+    return Math.floor(Math.random() * max);
   }
   
   app.post('/api/persons', (request, response) => {
     const body = request.body
   
-    if (!body.content) {
+    if (!body.name) {
       return response.status(400).json({ 
-        error: 'content missing' 
+        error: 'missing person name' 
+      })
+    } else if (!body.number) {
+      return response.status(400).json({ 
+        error: 'missing person number' 
       })
     }
   
     const person = {
-      content: body.content,
-      important: body.important || false,
-      id: generateId(),
+      name: body.name,
+      number: body.number,
+      id: getRandomInt(1000000)
     }
   
     persons = persons.concat(person)
