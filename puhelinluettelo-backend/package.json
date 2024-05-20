@@ -1,7 +1,7 @@
 {
-  "name": "part3",
+  "name": "osa3",
   "version": "1.0.0",
-  "description": "testing back end",
+  "description": "puhelinluettelo back end",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -11,6 +11,7 @@
   "author": "Tomi Gröning",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "morgan": "^1.10.0"
   },
