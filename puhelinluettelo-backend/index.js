@@ -78,6 +78,7 @@ let persons = [
     if (personToDelete){
       console.log("deleting", personToDelete)
       persons = persons.filter(person => person.id !== id)
+      response.json(personToDelete)
       response.status(204).end()
     } else {
       console.log("Person not found with id ", id)
@@ -87,7 +88,7 @@ let persons = [
   })
 
   const getRandomInt = (max) =>  {
-    return Math.floor(Math.random() * max);
+    return Math.floor(Math.random() * max).toString();
   }
   
   app.post('/api/persons', (request, response) => {
